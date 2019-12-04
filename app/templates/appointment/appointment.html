@@ -1,0 +1,49 @@
+{% extends "menu.html" %}
+
+{% block main_content %}
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+            <div class="col-lg-100">
+                <div class="card px-1">
+                    <div class="card-body">
+                        <h4 class="card-title">CUS1166 - Appointment Manager</h4>
+                        <form method="POST" action="{{url_for('appointment.appointment')}}" >
+
+                        <div class="add-items d-xl-inline-flex">
+                                <!-- csrf_token is required to validate the form -->
+                                {{ form.csrf_token }}
+                                {{ form.appo_title(class_='form-group-row', placeholder='Appointment Name')}}
+                                {{ form.appo_date(class_='form-group-row', placeholder='Date') }}
+                                {{ form.appo_duration(class_='form-group-row', placeholder='Appointment Duration')}}
+                                {{ form.appo_location(class_='form-group-row', placeholder='Appointment Location')}}
+                                {{ form.appo_customer_name(class_='form-group-row', placeholder='Customer Name')}}
+                                {{ form.appo_notes(class_='form-group-row', placeholder='Appointment Notes')}}
+                                <button class="add btn btn-primary font-weight-bold todo-list-add-btn">Add</button>
+                       </div>
+                     </form>
+
+                       <!-- Show current appointment if available -->
+                        <div class="list-wrapper">
+                            <ul class="d-flex flex-column-reverse todo-list">
+                             {% for appointment in appo_list %}
+
+                                    <li>
+                                    <a href="{{url_for('appointment.edit_appointment',appo_id=appointment.appo_id)}}">
+                                         <i class="fas fa-edit"></i>
+                                    </a>
+
+                                    <div class="form-check">
+                                    </div>
+                                    <a href="{{url_for('appointment.remove_appo',appo_id=appointment.appo_id)}}" class="remove"><i class="fas fa-times"></i></a>
+                              </li>
+                             {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

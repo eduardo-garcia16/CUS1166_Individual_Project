@@ -37,4 +37,7 @@ def create_app(config_class=Config):
     # Added the main app.
     from app.main import bp as main_routes_bp
     app.register_blueprint(main_routes_bp)
+
+    from app.appointment import bp as appointment_bp
+    app.register_blueprint(appointment_bp)
     return app;
